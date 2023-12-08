@@ -40,7 +40,6 @@ server.post("/api/logout", (req, res) => {
 
 server.post("/api/users", (req, res) => {
   const { username, password, role } = req.body;
-
   const users = router.db.get("users");
   // Check if the username is already taken
   if (users.find((u) => u.username === username)) {
@@ -51,6 +50,9 @@ server.post("/api/users", (req, res) => {
     id: users.length + 1,
     username,
     password,
+    firstname,
+    lastname,
+    status,
     role,
   };
 
