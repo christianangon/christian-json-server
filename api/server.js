@@ -128,7 +128,7 @@ server.post("/api/articles", (req, res) => {
     .json({ message: "Article created successfully", article: newArticle });
 });
 
-server.get("/api/articles/all: ", (req, res) => {
+server.get("/api/articles/all", (req, res) => {
   const articles = router.db.get("articles");
   res.json(articles);
 });
