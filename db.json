@@ -16,7 +16,8 @@
       "link": "article1_link_url",
       "date": "2023-12-08",
       "content": "Article 1 content",
-      "status": "Published",
+      "status": "Inactive",
+      "type": "Published",
       "writer": "Christian",
       "editor": "Ian",
       "company": "Company A"
@@ -28,7 +29,8 @@
       "link": "article2_link_url",
       "date": "2023-12-08",
       "content": "Article 2 content",
-      "status": "For Edit",
+      "status": "Active",
+      "type": "For Edit",
       "writer": "Kira",
       "editor": "Light",
       "company": "Company B"
