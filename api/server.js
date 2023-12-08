@@ -62,7 +62,8 @@ server.post("/api/users", (req, res) => {
   });
 });
 
-server.get("/api/users", (req, res) => {
+server.get("/api/users/all", (req, res) => {
+  const users = router.db.get("users");
   res.json(users);
 });
 
