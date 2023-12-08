@@ -11,27 +11,27 @@
   "articles": [
     {
       "id": 1,
-      "image": "article1_image_url",
+      "image": "https://img.freepik.com/free-vector/top-view-creative-workplace_1284-10109.jpg?w=900&t=st=1702028645~exp=1702029245~hmac=8d839bc15c062bee9f027615e947acbf728b5ed2533b06719d3151dc4142e90f",
       "title": "Article 1",
       "link": "article1_link_url",
       "date": "2023-12-08",
       "content": "Article 1 content",
       "status": "Published",
-      "writer": 3,
-      "editor": 2,
-      "company": 1
+      "writer": "Christian",
+      "editor": "Ian",
+      "company": "Company A"
     },
     {
       "id": 2,
-      "image": "article2_image_url",
+      "image": "https://img.freepik.com/free-vector/top-view-creative-workplace_1284-10109.jpg?w=900&t=st=1702028645~exp=1702029245~hmac=8d839bc15c062bee9f027615e947acbf728b5ed2533b06719d3151dc4142e90f",
       "title": "Article 2",
       "link": "article2_link_url",
       "date": "2023-12-08",
       "content": "Article 2 content",
       "status": "For Edit",
-      "writer": 3,
-      "editor": 2,
-      "company": 2
+      "writer": "Kira",
+      "editor": "Light",
+      "company": "Company B"
     }
   ]
 }
