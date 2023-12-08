@@ -42,12 +42,13 @@ server.post("/api/users", (req, res) => {
   const { username, password, type, firstname, lastname, status } = req.body;
   const users = router.db.get("users");
 
+  // Check if the username is already taken
   if (users.find({ username }).value()) {
     return res.status(400).json({ error: "Username already exists" });
   }
 
   const newUser = {
-    id: users.length + 1,
+    id: users.size() + 1,
     username,
     password,
     firstname,
@@ -56,7 +57,7 @@ server.post("/api/users", (req, res) => {
     type,
   };
 
-  router.db.get("users").push(newUser).write();
+  users.push(newUser).write();
 
   const token = generateCustomToken(newUser.id, newUser.username, newUser.role);
 
