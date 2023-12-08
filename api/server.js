@@ -42,7 +42,7 @@ server.post("/api/users", (req, res) => {
   const { username, password, type, firstname, lastname, status } = req.body;
   const db = router.db.getState(); // Get the entire state of the database
   const users = db.users;
-
+  console.log("test", users);
   if (users.find((u) => u.username === username)) {
     return res.status(400).json({ error: "Username already exists" });
   }
