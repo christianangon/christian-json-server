@@ -7,7 +7,7 @@ const middlewares = jsonServer.defaults();
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
-const generateCustomToken = (userId, username, role) => {
+const generateCustomToken = (userId, username, type) => {
   return `custom_token_${userId}`;
 };
 
@@ -18,10 +18,10 @@ server.post("/api/login", (req, res) => {
   const user = users.find({ username, password }).value();
 
   if (user) {
-    const token = generateCustomToken(user.id, user.username, user.role);
+    const token = generateCustomToken(user.id, user.username, user.type);
     res.json({
       token,
-      user: { id: user.id, username: user.username, role: user.role },
+      user: { id: user.id, username: user.username, type: user.type },
     });
   } else {
     res.status(401).json({ error: "Invalid username or password" });
@@ -62,8 +62,8 @@ server.post("/api/users", (req, res) => {
 
   // Respond with the updated data
   res.status(201).json({
-    token: generateCustomToken(newUser.id, newUser.username, newUser.role),
-    user: { id: newUser.id, username: newUser.username, role: newUser.role },
+    token: generateCustomToken(newUser.id, newUser.username, newUser.type),
+    user: { id: newUser.id, username: newUser.username, type: newUser.type },
   });
 });
 
@@ -74,7 +74,7 @@ server.get("/api/users/all", (req, res) => {
 
 server.put("/api/users/:id", (req, res) => {
   const userId = parseInt(req.params.id);
-  const { password, role } = req.body;
+  const { password, type } = req.body;
   const users = router.db.get("users");
   const userIndex = users.findIndex((u) => u.id === userId);
 
@@ -87,8 +87,8 @@ server.put("/api/users/:id", (req, res) => {
     users[userIndex].password = password;
   }
 
-  if (role) {
-    users[userIndex].role = role;
+  if (type) {
+    users[userIndex].type = type;
   }
 
   res.json({ message: "User updated successfully", user: users[userIndex] });
