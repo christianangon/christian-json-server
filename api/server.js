@@ -14,7 +14,7 @@ const generateCustomToken = (userId, username, role) => {
 server.post("/api/login", (req, res) => {
   const { username, password } = req.body;
 
-  const users = router.db.get("login");
+  const users = router.db.get("users");
   const user = users.find({ username, password }).value();
 
   if (user) {
@@ -41,6 +41,7 @@ server.post("/api/logout", (req, res) => {
 server.post("/api/users", (req, res) => {
   const { username, password, role } = req.body;
 
+  const users = router.db.get("users");
   // Check if the username is already taken
   if (users.find((u) => u.username === username)) {
     return res.status(400).json({ error: "Username already exists" });
@@ -70,7 +71,7 @@ server.get("/api/users/all", (req, res) => {
 server.put("/api/users/:id", (req, res) => {
   const userId = parseInt(req.params.id);
   const { password, role } = req.body;
-
+  const users = router.db.get("users");
   const userIndex = users.findIndex((u) => u.id === userId);
 
   if (userIndex === -1) {
@@ -91,6 +92,7 @@ server.put("/api/users/:id", (req, res) => {
 
 server.delete("/api/users/:id", (req, res) => {
   const userId = parseInt(req.params.id);
+  const users = router.db.get("users");
   const userIndex = users.findIndex((u) => u.id === userId);
 
   if (userIndex === -1) {
@@ -104,7 +106,7 @@ server.delete("/api/users/:id", (req, res) => {
 // Articles API
 server.post("/api/articles", (req, res) => {
   const { title, content, userId } = req.body;
-
+  const articles = router.db.get("articles");
   const newArticle = {
     id: articles.length + 1,
     companyId,
@@ -122,7 +124,8 @@ server.post("/api/articles", (req, res) => {
     .json({ message: "Article created successfully", article: newArticle });
 });
 
-server.get("/api/articles", (req, res) => {
+server.get("/api/articles/all: ", (req, res) => {
+  const articles = router.db.get("articles");
   res.json(articles);
 });
 
@@ -181,7 +184,8 @@ server.post("/api/companies", (req, res) => {
     .json({ message: "Company created successfully", company: newCompany });
 });
 
-server.get("/api/companies", (req, res) => {
+server.get("/api/companies/all", (req, res) => {
+  const companies = router.db.get("companies");
   res.json(companies);
 });
 
