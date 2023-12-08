@@ -7,20 +7,13 @@ const middlewares = jsonServer.defaults();
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
-// Mock user database
-let users = [
-  { id: 1, username: "admin", password: "admin123", role: "Admin" },
-  { id: 2, username: "editor", password: "editor123", role: "Editor" },
-  { id: 3, username: "writer", password: "writer123", role: "Writer" },
-];
-
 const generateCustomToken = (userId, username, role) => {
   return `custom_token_${userId}`;
 };
 
 server.post("/api/login", (req, res) => {
   const { username, password } = req.body;
-
+  const users = router.db.get("users");
   const user = users.find((u) => u.username === username);
 
   if (user && user.password === password) {
