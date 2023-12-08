@@ -19,7 +19,7 @@
       "status": "Published",
       "writer": "Christian",
       "editor": "Ian",
-      "company": "Company A"
+      "company": { "id": 1, "logo": "company1_logo_url", "name": "Company 1", "status": "Active" }
     },
     {
       "id": 2,
@@ -31,7 +31,7 @@
       "status": "For Edit",
       "writer": "Kira",
       "editor": "Light",
-      "company": "Company B"
+      "company": { "id": 1, "logo": "company1_logo_url", "name": "Company 1", "status": "Active" }
     }
   ]
 }
