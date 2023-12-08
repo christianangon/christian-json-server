@@ -192,7 +192,7 @@ server.get("/api/companies/all", (req, res) => {
 server.put("/api/companies/:id", (req, res) => {
   const companyId = parseInt(req.params.id);
   const { name, status } = req.body;
-
+  const companies = router.db.get("companies");
   const companyIndex = companies.findIndex((c) => c.id === companyId);
 
   if (companyIndex === -1) {
@@ -217,7 +217,7 @@ server.put("/api/companies/:id", (req, res) => {
 server.delete("/api/companies/:id", (req, res) => {
   const companyId = parseInt(req.params.id);
   const companyIndex = companies.findIndex((c) => c.id === companyId);
-
+  const companies = router.db.get("companies");
   if (companyIndex === -1) {
     return res.status(404).json({ error: "Company not found" });
   }
