@@ -40,15 +40,15 @@ server.post("/api/logout", (req, res) => {
 
 server.post("/api/users", (req, res) => {
   const { username, password, type, firstname, lastname, status } = req.body;
-  const users = router.db.get("users");
+  const db = router.db.getState(); // Get the entire state of the database
+  const users = db.users;
 
-  // Check if the username is already taken
-  if (users.find({ username }).value()) {
+  if (users.find((u) => u.username === username)) {
     return res.status(400).json({ error: "Username already exists" });
   }
 
   const newUser = {
-    id: users.size() + 1,
+    id: users.length + 1,
     username,
     password,
     firstname,
@@ -57,7 +57,7 @@ server.post("/api/users", (req, res) => {
     type,
   };
 
-  users.push(newUser).write();
+  router.db.get("users").push(newUser).write();
 
   const token = generateCustomToken(newUser.id, newUser.username, newUser.role);
 
