@@ -34,6 +34,16 @@ server.post("/api/login", (req, res) => {
   }
 });
 
+server.post("/api/logout", (req, res) => {
+  // Simulate logout by invalidating the token (custom logic)
+  const token = req.headers["authorization"];
+  if (token && token.startsWith("custom_token_")) {
+    res.json({ message: "Logout successful" });
+  } else {
+    res.status(401).json({ error: "Invalid token" });
+  }
+});
+
 server.post("/api/users", (req, res) => {
   const { username, password, role } = req.body;
 
@@ -58,7 +68,7 @@ server.post("/api/users", (req, res) => {
   });
 });
 
-server.get("/api/users", (req, res) => {
+server.get(" ", (req, res) => {
   res.json(users);
 });
 
