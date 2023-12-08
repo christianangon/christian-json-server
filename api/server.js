@@ -13,10 +13,11 @@ const generateCustomToken = (userId, username, role) => {
 
 server.post("/api/login", (req, res) => {
   const { username, password } = req.body;
-  const users = router.db.get("login");
-  const user = users.find((u) => u.username === username);
 
-  if (user && user.password === password) {
+  const users = router.db.get("login");
+  const user = users.find({ username, password }).value();
+
+  if (user) {
     const token = generateCustomToken(user.id, user.username, user.role);
     res.json({
       token,
