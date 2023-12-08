@@ -39,7 +39,7 @@ server.post("/api/logout", (req, res) => {
 });
 
 server.post("/api/users", (req, res) => {
-  const { username, password, role, firstname, lastname, status } = req.body;
+  const { username, password, type, firstname, lastname, status } = req.body;
   const users = router.db.get("db").get("users").value(); // Corrected to use router.db.get("db")
 
   // Check if the username is already taken
@@ -54,7 +54,7 @@ server.post("/api/users", (req, res) => {
     firstname,
     lastname,
     status,
-    role,
+    type,
   };
 
   router.db.get("db").get("users").push(newUser).write(); // Corrected to use router.db.get("db").get("users").push(newUser).write()
