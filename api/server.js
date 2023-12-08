@@ -1,6 +1,4 @@
 const jsonServer = require("json-server");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 
 const server = jsonServer.create();
 const router = jsonServer.router("db.json");
@@ -9,8 +7,6 @@ const middlewares = jsonServer.defaults();
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
-const secretKey = "yourSecretKey"; // Change this to a secure secret key
-
 // Mock user database
 let users = [
   { id: 1, username: "admin", password: "admin123", role: "Admin" },
@@ -18,8 +14,8 @@ let users = [
   { id: 3, username: "writer", password: "writer123", role: "Writer" },
 ];
 
-const generateToken = (userId, username, role) => {
-  return jwt.sign({ userId, username, role }, secretKey, { expiresIn: "1h" });
+const generateCustomToken = (userId, username, role) => {
+  return `custom_token_${userId}`;
 };
 
 server.post("/api/login", (req, res) => {
@@ -27,8 +23,8 @@ server.post("/api/login", (req, res) => {
 
   const user = users.find((u) => u.username === username);
 
-  if (user && bcrypt.compareSync(password, user.password)) {
-    const token = generateToken(user.id, user.username, user.role);
+  if (user && user.password === password) {
+    const token = generateCustomToken(user.id, user.username, user.role);
     res.json({
       token,
       user: { id: user.id, username: user.username, role: user.role },
@@ -49,19 +45,17 @@ server.post("/api/users", (req, res) => {
   const newUser = {
     id: users.length + 1,
     username,
-    password: bcrypt.hashSync(password, 10), // Hash the password
+    password,
     role,
   };
 
   users.push(newUser);
-  const token = generateToken(newUser.id, newUser.username, newUser.role);
+  const token = generateCustomToken(newUser.id, newUser.username, newUser.role);
 
-  res
-    .status(201)
-    .json({
-      token,
-      user: { id: newUser.id, username: newUser.username, role: newUser.role },
-    });
+  res.status(201).json({
+    token,
+    user: { id: newUser.id, username: newUser.username, role: newUser.role },
+  });
 });
 
 server.get("/api/users", (req, res) => {
@@ -80,7 +74,7 @@ server.put("/api/users/:id", (req, res) => {
 
   // Update the user
   if (password) {
-    users[userIndex].password = bcrypt.hashSync(password, 10); // Hash the new password
+    users[userIndex].password = password;
   }
 
   if (role) {
