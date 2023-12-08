@@ -4,8 +4,8 @@
     { "id": 2, "logo": "company2_logo_url", "name": "Company 2", "status": "Inactive" }
   ],
   "users": [
-    { "id": 1, "username": "admin", "password": "admin123"," firstname": "Admin", "lastname": "User", "type": "Admin", "status": "Active" },
-    { "id": 2, "username": "editor", "password": "editor123"," firstname": "Editor", "lastname": "User", "type": "Editor", "status": "Active" },
+    { "id": 1, "username": "admin", "password": "admin123", "firstname": "Admin", "lastname": "User", "type": "Admin", "status": "Active" },
+    { "id": 2, "username": "editor", "password": "editor123", "firstname": "Editor", "lastname": "User", "type": "Editor", "status": "Active" },
     { "id": 3, "username": "writer", "password": "writer123", "firstname": "Writer", "lastname": "User", "type": "Writer", "status": "Active" }
   ],
   "articles": [
