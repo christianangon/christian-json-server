@@ -35,8 +35,8 @@
     }
   ],
   "login": [
-    { "username": "admin", "password": "admin123", "role": "Admin" },
-    { "username": "editor", "password": "editor123", "role": "Editor" },
-    { "username": "writer", "password": "writer123", "role": "Writer" }
+    { "username": "admin", "password": "admin", "role": "Admin" },
+    { "username": "editor", "password": "editor", "role": "Editor" },
+    { "username": "writer", "password": "writer", "role": "Writer" }
   ]
 }

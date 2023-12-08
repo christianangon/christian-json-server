@@ -68,7 +68,7 @@ server.post("/api/users", (req, res) => {
   });
 });
 
-server.get(" ", (req, res) => {
+server.get("/api/users", (req, res) => {
   res.json(users);
 });
 
@@ -104,6 +104,127 @@ server.delete("/api/users/:id", (req, res) => {
 
   users.splice(userIndex, 1);
   res.json({ message: "User deleted successfully" });
+});
+
+// Articles API
+server.post("/api/articles", (req, res) => {
+  const { title, content, userId } = req.body;
+
+  const newArticle = {
+    id: articles.length + 1,
+    companyId,
+    image,
+    title,
+    link,
+    date,
+    content,
+  };
+
+  articles.push(newArticle);
+
+  res
+    .status(201)
+    .json({ message: "Article created successfully", article: newArticle });
+});
+
+server.get("/api/articles", (req, res) => {
+  res.json(articles);
+});
+
+server.put("/api/articles/:id", (req, res) => {
+  const articleId = parseInt(req.params.id);
+  const { title, content } = req.body;
+
+  const articleIndex = articles.findIndex((a) => a.id === articleId);
+
+  if (articleIndex === -1) {
+    return res.status(404).json({ error: "Article not found" });
+  }
+
+  // Update the article
+  if (title) {
+    articles[articleIndex].title = title;
+  }
+
+  if (content) {
+    articles[articleIndex].content = content;
+  }
+
+  res.json({
+    message: "Article updated successfully",
+    article: articles[articleIndex],
+  });
+});
+
+server.delete("/api/articles/:id", (req, res) => {
+  const articleId = parseInt(req.params.id);
+  const articleIndex = articles.findIndex((a) => a.id === articleId);
+
+  if (articleIndex === -1) {
+    return res.status(404).json({ error: "Article not found" });
+  }
+
+  articles.splice(articleIndex, 1);
+  res.json({ message: "Article deleted successfully" });
+});
+
+// Companies API
+server.post("/api/companies", (req, res) => {
+  const { name, status } = req.body;
+
+  const newCompany = {
+    id: companies.length + 1,
+    logo,
+    name,
+    status,
+  };
+
+  companies.push(newCompany);
+
+  res
+    .status(201)
+    .json({ message: "Company created successfully", company: newCompany });
+});
+
+server.get("/api/companies", (req, res) => {
+  res.json(companies);
+});
+
+server.put("/api/companies/:id", (req, res) => {
+  const companyId = parseInt(req.params.id);
+  const { name, status } = req.body;
+
+  const companyIndex = companies.findIndex((c) => c.id === companyId);
+
+  if (companyIndex === -1) {
+    return res.status(404).json({ error: "Company not found" });
+  }
+
+  // Update the company
+  if (name) {
+    companies[companyIndex].name = name;
+  }
+
+  if (status) {
+    companies[companyIndex].status = status;
+  }
+
+  res.json({
+    message: "Company updated successfully",
+    company: companies[companyIndex],
+  });
+});
+
+server.delete("/api/companies/:id", (req, res) => {
+  const companyId = parseInt(req.params.id);
+  const companyIndex = companies.findIndex((c) => c.id === companyId);
+
+  if (companyIndex === -1) {
+    return res.status(404).json({ error: "Company not found" });
+  }
+
+  companies.splice(companyIndex, 1);
+  res.json({ message: "Company deleted successfully" });
 });
 
 server.use(router);
