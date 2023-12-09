@@ -21,7 +21,12 @@ server.post("/api/login", (req, res) => {
     const token = generateCustomToken(user.id, user.username, user.type);
     res.json({
       token,
-      user: { id: user.id, username: user.username, type: user.type },
+      user: {
+        id: user.id,
+        username: user.username,
+        type: user.type,
+        name: user.firstname + " " + user.lastname,
+      },
     });
   } else {
     res.status(401).json({ error: "Invalid username or password" });
@@ -119,6 +124,9 @@ server.post("/api/articles", (req, res) => {
     link,
     date,
     content,
+    writer,
+    editor,
+    status: "For Edit",
   };
 
   articles.push(newArticle);
