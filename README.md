@@ -14,12 +14,41 @@ Demo from this repository:
 
 ```json
 {
-  "posts": [
-    { "id": 1, "title": "json-server", "author": "typicode" }
+  "companies": [
+    { "id": 1, "logo": "company1_logo_url", "name": "Company 1", "status": "Active" },
+    { "id": 2, "logo": "company2_logo_url", "name": "Company 2", "status": "Inactive" }
   ],
-  "comments": [
-    { "id": 1, "body": "some comment", "postId": 1 }
+  "users": [
+    { "id": 1, "username": "admin", "password": "admin123", "firstname": "Admin", "lastname": "User", "type": "Admin", "status": "Active" },
+    { "id": 2, "username": "editor", "password": "editor123", "firstname": "Editor", "lastname": "User", "type": "Editor", "status": "Active" },
+    { "id": 3, "username": "writer", "password": "writer123", "firstname": "Writer", "lastname": "User", "type": "Writer", "status": "Active" }
   ],
-  "profile": { "name": "typicode" }
+  "articles": [
+    {
+      "id": 1,
+      "image": "https://img.freepik.com/free-vector/top-view-creative-workplace_1284-10109.jpg?w=900&t=st=1702028645~exp=1702029245~hmac=8d839bc15c062bee9f027615e947acbf728b5ed2533b06719d3151dc4142e90f",
+      "title": "Article 1",
+      "link": "article1_link_url",
+      "date": "2023-12-08",
+      "content": "Article 1 content",
+      "status": "Published",
+      "writer": "Christian",
+      "editor": "Ian",
+      "company": { "id": 1, "logo": "company1_logo_url", "name": "Company 1", "status": "Active" }
+    },
+    {
+      "id": 2,
+      "image": "https://img.freepik.com/free-vector/top-view-creative-workplace_1284-10109.jpg?w=900&t=st=1702028645~exp=1702029245~hmac=8d839bc15c062bee9f027615e947acbf728b5ed2533b06719d3151dc4142e90f",
+      "title": "Article 2",
+      "link": "article2_link_url",
+      "date": "2023-12-08",
+      "content": "Article 2 content",
+      "status": "For Edit",
+      "writer": "Kira",
+      "editor": null,
+      "company": { "id": 1, "logo": "company1_logo_url", "name": "Company 1", "status": "Active" }
+    }
+  ]
 }
+
 ```
