@@ -43,7 +43,7 @@ server.post("/api/logout", (req, res) => {
   }
 });
 
-server.post("/api/users", (req, res) => {
+server.post("/api/users/create", (req, res) => {
   const { username, password, type, firstname, lastname, status } = req.body;
   const users = router.db.get("users");
   const user = users.find({ username }).value();
@@ -77,7 +77,7 @@ server.get("/api/users/all", (req, res) => {
   res.json(users);
 });
 
-server.put("/api/users/:id", (req, res) => {
+server.put("/api/users/edit", (req, res) => {
   const userId = parseInt(req.params.id);
   const { password, type } = req.body;
   const users = router.db.get("users");
@@ -99,7 +99,7 @@ server.put("/api/users/:id", (req, res) => {
   res.json({ message: "User updated successfully", user: users[userIndex] });
 });
 
-server.delete("/api/users/:id", (req, res) => {
+server.delete("/api/users/delete", (req, res) => {
   const userId = parseInt(req.params.id);
   const users = router.db.get("users");
   const userIndex = users.findIndex((u) => u.id === userId);
@@ -113,7 +113,7 @@ server.delete("/api/users/:id", (req, res) => {
 });
 
 // Articles API
-server.post("/api/articles", (req, res) => {
+server.post("/api/articles/create", (req, res) => {
   const { title, content, userId } = req.body;
   const articles = router.db.get("articles");
   const newArticle = {
@@ -141,7 +141,7 @@ server.get("/api/articles/all", (req, res) => {
   res.json(articles);
 });
 
-server.put("/api/articles/:id", (req, res) => {
+server.put("/api/articles/edit", (req, res) => {
   const articleId = parseInt(req.params.id);
   const { title, content } = req.body;
 
@@ -166,7 +166,7 @@ server.put("/api/articles/:id", (req, res) => {
   });
 });
 
-server.delete("/api/articles/:id", (req, res) => {
+server.delete("/api/articles/delete", (req, res) => {
   const articleId = parseInt(req.params.id);
   const articleIndex = articles.findIndex((a) => a.id === articleId);
 
@@ -179,7 +179,7 @@ server.delete("/api/articles/:id", (req, res) => {
 });
 
 // Companies API
-server.post("/api/companies", (req, res) => {
+server.post("/api/companies/create", (req, res) => {
   const { name, status } = req.body;
 
   const newCompany = {
@@ -201,7 +201,7 @@ server.get("/api/companies/all", (req, res) => {
   res.json(companies);
 });
 
-server.put("/api/companies/:id", (req, res) => {
+server.put("/api/companies/edit", (req, res) => {
   const companyId = parseInt(req.params.id);
   const { name, status } = req.body;
   const companies = router.db.get("companies");
@@ -226,7 +226,7 @@ server.put("/api/companies/:id", (req, res) => {
   });
 });
 
-server.delete("/api/companies/:id", (req, res) => {
+server.delete("/api/companies/delete", (req, res) => {
   const companyId = parseInt(req.params.id);
   const companyIndex = companies.findIndex((c) => c.id === companyId);
   const companies = router.db.get("companies");
