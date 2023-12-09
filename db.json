@@ -30,7 +30,7 @@
       "content": "Article 2 content",
       "status": "For Edit",
       "writer": "Kira",
-      "editor": "Light",
+      "editor": null,
       "company": { "id": 1, "logo": "company1_logo_url", "name": "Company 1", "status": "Active" }
     }
   ]
